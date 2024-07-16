@@ -11,35 +11,27 @@ class STALKERLIKE_5_API AWeapon_Pickup : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
-	AWeapon_Pickup();
+public:
+    // Sets default values for this actor's properties
+    AWeapon_Pickup();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+public:
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
-	class AWeaponBase* Weapon;
+    // Function to handle pickup
+    UFUNCTION()
+    void OnPickup(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
-	class UBoxComponent* CollisionBox;
+    // Collider for pickup
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pickup")
+    class UBoxComponent* PickupCollider;
 
-	/*UFUNCTION()
-	void OnPickup(class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);*/
-
-
-	UFUNCTION()
-	void OnPickup(
-		class AActor* OtherActor,
-		class UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex,
-		bool bFromSweep,
-		const FHitResult& SweepResult
-	);
-
+    // Mesh for the weapon
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pickup")
+    class UStaticMeshComponent* WeaponMesh;
 };
